@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 3 Concepts Demo</title>
+    <script src="https://unpkg.com/vue@3.2.24/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Conditional Rendering -->
+      <div>
+        <h2>Conditional Rendering</h2>
+        <p v-if="showParagraph">This paragraph is rendered using v-if.</p>
+        <p v-else>This paragraph is rendered using v-else.</p>
+
+        <p v-show="showWithVShow">This paragraph is toggled using v-show.</p>
+      </div>
+
+      <hr />
+
+      <!-- Looping with v-for -->
+      <div>
+        <h2>Looping with v-for</h2>
+        <ul>
+          <li v-for="(item, index) in items" :key="index">{{ item }}</li>
+        </ul>
+
+        <h3>v-if with v-for</h3>
+        <ul>
+          <li v-for="evenNumber in evenNumbers" :key="evenNumber">
+            {{ evenNumber }} (even)
+          </li>
+          <li v-for="oddNumber in oddNumbers" :key="oddNumber">
+            {{ oddNumber }} (odd)
+          </li>
+        </ul>
+      </div>
+
+      <hr />
+
+      <!-- Form Input Handling -->
+      <div>
+        <h2>Form Input Handling</h2>
+        <input type="text" v-model="textInput" />
+        <p>You entered: {{ textInput }}</p>
+      </div>
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            showParagraph: true,
+            showWithVShow: true,
+            items: ["Item 1", "Item 2", "Item 3"],
+            numbers: [1, 2, 3, 4, 5],
+            textInput: "",
+          };
+        },
+        computed: {
+          evenNumbers() {
+            return this.numbers.filter((number) => number % 2 === 0);
+          },
+          oddNumbers() {
+            return this.numbers.filter((number) => number % 2 !== 0);
+          },
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
